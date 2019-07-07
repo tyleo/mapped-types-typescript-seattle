@@ -9,7 +9,7 @@
       "type": "chrome",
       "request": "launch",
       "file": "${workspaceFolder}/packages/App/target/webpack/dev/index.html",
-      //"trace": "verbose",
+      // "trace": "verbose",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
         "webpack:///../*": "${workspaceFolder}/packages/*"

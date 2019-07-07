@@ -12,34 +12,42 @@ export const [Colors, Color] = App.colors({
 
   // Color Mappings
   primaryForeground: setl.ref("darkred"),
-  primaryBackground: setl.ref("blue"),
-  secondaryForeground: setl.ref("red"),
+  primaryBackground: setl.ref("red"),
+  secondaryBackground: setl.ref("blue"),
+
+  buttonBackground: setl.ref("primaryBackground"),
+  inputBackground: setl.ref("green"),
 });
 export type Color = keyof typeof Color;
 
 // Font
 export const [Fonts, Font] = App.fonts({
   base: { fontFamily: "consolas" },
+
   normal: { basedOn: "base", fontSize: "16px" },
+  heading: { basedOn: "normal", fontSize: "32px", fontStyle: "bold" },
 });
 export type Font = keyof typeof Font;
 
 // Number
-export const [StyleNumbers, StyleNumber] = App.numbers({
+export const [Numbers, Number] = App.numbers({
   // Raw Numbers
-  smallPadding: 5,
+  smallPadding: 7.5,
   bigPadding: 10,
+  borderRadius: 10,
 
   // Number Mappings
   paddingToButtonEdge: setl.ref("smallPadding"),
+  marginBetweenItems: setl.ref("smallPadding"),
   paddingToPageEdge: setl.ref("bigPadding"),
+  marginToHeading: setl.ref("bigPadding"),
 });
-export type StyleNumber = keyof typeof StyleNumber;
+export type Number = keyof typeof Number;
 
 // Theme
 export const Theme = {
   Colors,
   Fonts,
-  StyleNumbers,
+  Numbers,
 } as const;
 export type Theme = typeof Theme;
