@@ -3,17 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "App": ["./ts"]
+      "setl": ["./ts"]
     },
     "rootDir": "./ts",
     "declarationDir": "./target/ts",
     "outDir": "./target/ts",
     "tsBuildInfoFile": "./target/ts/tsconfig.tsbuildinfo"
   },
-  "include": ["./ts/**/*.ts", "./ts/**/*.tsx"],
-  "references": [
-    {
-      "path": "../setl"
-    }
-  ]
+  "include": ["./ts/**/*.ts", "./ts/**/*.tsx"]
 }

@@ -1,4 +1,4 @@
-import * as App from "App";
+import * as setl from "setl";
 
 export interface IFont<TKey extends string | number | symbol = string> {
   basedOn?: TKey;
@@ -31,10 +31,10 @@ const buildFont = <TFontKey extends string | number | symbol>() => (
   ];
 };
 
-export const fonts = <TItems extends App.Items<IFont<keyof TItems>, TItems>>(
+export const fonts = <TItems extends setl.Items<IFont<keyof TItems>, TItems>>(
   self: TItems,
 ) =>
-  App.theme(self, buildFont<keyof TItems>(), (): [
+  setl.theme(self, buildFont<keyof TItems>(), (): [
     IFont<keyof TItems>,
     string,
   ] => [{}, "comic sans"]);

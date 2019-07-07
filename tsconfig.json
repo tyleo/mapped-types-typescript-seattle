@@ -3,6 +3,9 @@
   "references": [
     {
       "path": "packages/App"
+    },
+    {
+      "path": "packages/setl"
     }
   ]
 }

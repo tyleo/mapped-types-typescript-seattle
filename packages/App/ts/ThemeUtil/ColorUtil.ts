@@ -1,4 +1,4 @@
-import * as App from "App";
+import * as setl from "setl";
 
 interface IColor {
   readonly r: number;
@@ -12,6 +12,6 @@ const buildColor = (item: IColor) =>
     ? `rgb(${item.r}, ${item.g}, ${item.b})`
     : `rgba(${item.r}, ${item.g}, ${item.b}, ${item.a})`;
 
-export const colors = <TItems extends App.Items<IColor, TItems>>(
+export const colors = <TItems extends setl.Items<IColor, TItems>>(
   self: TItems,
-) => App.theme(self, buildColor, () => `rgb(0, 0, 0)`);
+) => setl.theme(self, buildColor, () => `rgb(0, 0, 0)`);

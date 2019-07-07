@@ -1,7 +1,7 @@
-import * as App from "App";
+import * as setl from "setl";
 
 const buildNumber = (item: number) => item;
 
-export const numbers = <TItems extends App.Items<number, TItems>>(
+export const numbers = <TItems extends setl.Items<number, TItems>>(
   self: TItems,
-) => App.theme(self, buildNumber, () => 0);
+) => setl.theme(self, buildNumber, () => 0);
