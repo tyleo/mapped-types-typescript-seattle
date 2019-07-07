@@ -6,7 +6,7 @@ import * as Webpack from "webpack";
 const config: Webpack.Configuration = {
   devtool: "source-map",
   entry: {
-    index: Path.resolve(__dirname, "../index.js"),
+    index: Path.resolve(__dirname, "../renderer.js"),
   },
   mode: "development",
   module: {
