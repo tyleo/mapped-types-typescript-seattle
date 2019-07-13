@@ -16,22 +16,22 @@ const buildFont = <TFontKey extends string | number | symbol>() => (
   getFont: (key: TFontKey) => [IFont<TFontKey>, string],
 ): [IFont<TFontKey>, string] => {
   const result = {
-    ...(item.basedOn === undefined ? {} : getFont(item.basedOn)),
+    ...(item.basedOn === undefined ? {} : getFont(item.basedOn)[0]),
     ...item,
     basedOn: undefined,
   };
   const pad = (object?: any) => (object === undefined ? "" : `${object} `);
   return [
     result,
-    `${pad(item.fontStyle)}${pad(item.fontVariant)}${pad(item.fontWeight)}${pad(
-      item.fontSize,
-    )}${item.lineHeight === undefined ? "" : `/${item.lineHeight}`}${
-      item.fontFamily
-    }`,
+    `${pad(result.fontStyle)}${pad(result.fontVariant)}${pad(
+      result.fontWeight,
+    )}${pad(result.fontSize)}${
+      result.lineHeight === undefined ? "" : `/${result.lineHeight}`
+    }${result.fontFamily}`,
   ];
 };
 
-export const fonts = <TItems extends setl.Items<TItems, IFont<keyof TItems>>>(
+export const fonts = <TItems extends { [k: string]: IFont<keyof TItems> }>(
   self: TItems,
 ) =>
   setl.theme(self, buildFont<keyof TItems>(), (): [

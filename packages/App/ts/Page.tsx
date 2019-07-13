@@ -13,7 +13,10 @@ const body = (theme: App.Theme): React.CSSProperties => ({
 
 const button = (theme: App.Theme): React.CSSProperties => ({
   backgroundColor: theme.Colors.buttonBackground,
+  border: "none",
+  borderRadius: `${theme.Numbers.borderRadius}px`,
   color: theme.Colors.primaryForeground,
+  font: theme.Fonts.normal[1],
   marginLeft: `${theme.Numbers.marginBetweenItems}px`,
   marginRight: `${theme.Numbers.marginBetweenItems}px`,
   padding: `${theme.Numbers.paddingToButtonEdge}px`,
@@ -45,7 +48,10 @@ const innerContent = (theme: App.Theme): React.CSSProperties => ({
 
 const input = (theme: App.Theme): React.CSSProperties => ({
   backgroundColor: theme.Colors.inputBackground,
+  border: "none",
   color: theme.Colors.primaryForeground,
+  font: theme.Fonts.normal[1],
+  padding: `${theme.Numbers.paddingToInputEdge}px`,
 });
 
 const label = (theme: App.Theme): React.CSSProperties => ({
@@ -72,7 +78,7 @@ export const Page = () => {
     <div style={body(theme)}>
       <div style={content(theme)}>
         <div style={innerContent(theme)}>
-          <span style={heading(theme)}>Space Camp Sign Up</span>
+          <span style={heading(theme)}>{theme.Strings.title}</span>
           <div style={vertItem(theme)}>
             <label style={label(theme)}>First Name</label>
             <input style={input(theme)} />
@@ -86,12 +92,12 @@ export const Page = () => {
             <input style={input(theme)} />
           </div>
           <div style={vertItem(theme)}>
-            <label style={label(theme)}>Favorite Planet</label>
+            <label style={label(theme)}>{theme.Strings.question}</label>
             <input style={input(theme)} />
           </div>
           <div style={buttonBox(theme)}>
-            <button style={button(theme)}>Launch</button>
-            <button style={button(theme)}>Return to Earth</button>
+            <button style={button(theme)}>{theme.Strings.okButton}</button>
+            <button style={button(theme)}>{theme.Strings.exitButton}</button>
           </div>
         </div>
       </div>

@@ -1,45 +1,55 @@
-export type Items<T, TItem> = {
-  readonly [K in keyof T]: TItem | keyof T;
-};
-
 type Theme<T, TItemOut> = { readonly [K in keyof T]: TItemOut };
 
-type ThemeKeys<T> = { readonly [K in keyof T]: K };
-
-const intoKeys = <T>(v: T): ThemeKeys<T> =>
-  Object.keys(v).reduce(
-    (prev, curr) => {
-      prev[curr] = curr;
-      return prev;
-    },
-    {} as { [k: string]: string },
-  ) as ThemeKeys<T>;
-
-export const theme = <T extends Items<T, TItem>, TItem, TItemOut>(
+export const theme = <T extends { [k: string]: TItem }, TItem, TItemOut>(
   self: T,
   buildItem: (item: TItem, getItem: (ref: keyof T) => TItemOut) => TItemOut,
   err: (ref: keyof T) => TItemOut,
-): [Theme<T, TItemOut>, ThemeKeys<T>, T] => {
-  type Key = keyof T;
-  const isKey = (v: Key | TItem): v is Key => typeof v === "string";
+): Theme<T, TItemOut> => {
+  const result = {} as { [K in keyof T]: TItemOut };
+  const activeSet = new Set<keyof T>();
 
-  const result = {} as { [K in Key]: TItemOut };
-  const activeSet = new Set<Key>();
-
-  const getItem = (ref: Key): TItemOut => {
+  const getItem = (ref: keyof T): TItemOut => {
     if (result[ref] !== undefined) return result[ref];
     if (activeSet.has(ref)) return err(ref);
 
     activeSet.add(ref);
 
-    const item = self[ref] as Key | TItem;
-    result[ref] = isKey(item) ? getItem(item) : buildItem(item, getItem);
+    result[ref] = buildItem(self[ref], getItem);
 
     activeSet.delete(ref);
 
     return result[ref];
   };
 
-  Object.keys(self).forEach(k => getItem(k as Key));
-  return [result as Theme<T, TItemOut>, intoKeys(result), self];
+  Object.keys(self).forEach(k => getItem(k));
+  return result as Theme<T, TItemOut>;
+};
+
+// Mappings
+type Keys<T> = { readonly [K in keyof T]: K };
+
+const intoKeys = <T>(v: T): Keys<T> =>
+  Object.keys(v).reduce(
+    (prev, curr) => {
+      prev[curr] = curr;
+      return prev;
+    },
+    {} as { [k: string]: string },
+  ) as Keys<T>;
+
+const buildMapping = <TTheme extends { [k: string]: TItemOut }, TItemOut>(
+  builtTheme: TTheme,
+) => (item: keyof TTheme): TItemOut => builtTheme[item];
+
+export const mappings = <
+  T extends { [k: string]: keyof TTheme },
+  TTheme extends { [k: string]: TItemOut },
+  TItemOut
+>(
+  self: T,
+  builtTheme: TTheme,
+  err: (ref: keyof T) => TItemOut,
+) => {
+  const result = theme(self, buildMapping<TTheme, TItemOut>(builtTheme), err);
+  return [result, intoKeys(result)];
 };

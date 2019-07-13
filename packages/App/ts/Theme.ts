@@ -1,55 +1,102 @@
+import * as setl from "setl";
+
 import * as App from "App";
 
 // Color
-export const [RawColors, RawColor, RawColorInput] = App.colors({
-  red: { r: 255, g: 0, b: 0 },
-  green: { r: 0, g: 255, b: 0 },
-  blue: { r: 0, g: 0, b: 255 },
-  white: { r: 255, g: 255, b: 255 },
+const RawColors = App.colors({
+  buttonGrey: { r: 45, g: 50, b: 56 },
+  inputGrey: { r: 54, g: 54, b: 55 },
+  darkestGrey: { r: 32, g: 33, b: 35 },
+  grey: { r: 39, g: 40, b: 43 },
+  lightestGrey: { r: 172, g: 177, b: 176 },
 });
-export type RawColor = keyof typeof RawColor;
 
 // Color Mapping
-export const [Colors, Color, ColorInput] = App.colorMappings(
+export const [Colors, Color] = setl.mappings(
   {
-    primaryForeground: { key: "white" },
-    primaryBackground: { key: "red" },
-    secondaryBackground: { key: "blue" },
+    primaryForeground: "lightestGrey",
+    primaryBackground: "darkestGrey",
+    secondaryBackground: "grey",
 
-    buttonBackground: "primaryBackground",
-    inputBackground: { key: "green" },
+    buttonBackground: "buttonGrey",
+    inputBackground: "inputGrey",
   },
   RawColors,
+  () => "rgb(0, 0, 0)",
 );
+export type Color = keyof typeof Color;
 
 // Font
-export const [Fonts, Font] = App.fonts({
+const RawFonts = App.fonts({
   base: { fontFamily: "consolas" },
 
   normal: { basedOn: "base", fontSize: "16px" },
   heading: { basedOn: "normal", fontSize: "32px", fontStyle: "bold" },
 });
+
+export const [Fonts, Font] = setl.mappings(
+  {
+    normal: "normal",
+    heading: "heading",
+  },
+  RawFonts,
+  (): [App.IFont<keyof typeof RawFonts>, string] => [{}, "comic sans"],
+);
 export type Font = keyof typeof Font;
 
 // Number
-export const [Numbers, Number] = App.numbers({
-  // Raw Numbers
-  smallPadding: 7.5,
-  bigPadding: 10,
-  borderRadius: 10,
+const RawNumbers = App.simpleTheme(
+  {
+    smallerPadding: 5,
+    smallPadding: 7.5,
+    bigPadding: 10,
+    borderRadius: 10,
+  },
+  0,
+);
 
-  // Number Mappings
-  paddingToButtonEdge: "smallPadding",
-  marginBetweenItems: "smallPadding",
-  paddingToPageEdge: "bigPadding",
-  marginToHeading: "bigPadding",
-});
+export const [Numbers, Number] = setl.mappings(
+  {
+    paddingToButtonEdge: "smallPadding",
+    paddingToInputEdge: "smallerPadding",
+    marginBetweenItems: "smallPadding",
+    paddingToPageEdge: "bigPadding",
+    marginToHeading: "bigPadding",
+    borderRadius: "borderRadius",
+  },
+  RawNumbers,
+  () => 0,
+);
 export type Number = keyof typeof Number;
+
+// String
+const RawStrings = App.simpleTheme(
+  {
+    title: "Space Camp Sign Up",
+    question: "Favorite Planet",
+    okButton: "Launch",
+    exitButton: "Return to Earth",
+  },
+  "ERROR",
+);
+
+export const [Strings, String] = setl.mappings(
+  {
+    title: "title",
+    question: "question",
+    okButton: "okButton",
+    exitButton: "exitButton",
+  },
+  RawStrings,
+  () => "ERROR",
+);
+export type String = keyof typeof String;
 
 // Theme
 export const Theme = {
   Colors,
   Fonts,
   Numbers,
+  Strings,
 } as const;
 export type Theme = typeof Theme;
