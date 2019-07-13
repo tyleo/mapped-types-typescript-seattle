@@ -1,10 +1,10 @@
-type Theme<T, TItemOut> = { readonly [K in keyof T]: TItemOut };
+type Items<T, TItemOut> = { readonly [K in keyof T]: TItemOut };
 
-export const theme = <T extends { [k: string]: TItem }, TItem, TItemOut>(
+export const items = <T extends { [k: string]: TItem }, TItem, TItemOut>(
   self: T,
   buildItem: (item: TItem, getItem: (ref: keyof T) => TItemOut) => TItemOut,
   err: (ref: keyof T) => TItemOut,
-): Theme<T, TItemOut> => {
+): Items<T, TItemOut> => {
   const result = {} as { [K in keyof T]: TItemOut };
   const activeSet = new Set<keyof T>();
 
@@ -22,7 +22,7 @@ export const theme = <T extends { [k: string]: TItem }, TItem, TItemOut>(
   };
 
   Object.keys(self).forEach(k => getItem(k));
-  return result as Theme<T, TItemOut>;
+  return result as Items<T, TItemOut>;
 };
 
 // Mappings
@@ -41,7 +41,7 @@ const buildMapping = <TTheme extends { [k: string]: TItemOut }, TItemOut>(
   builtTheme: TTheme,
 ) => (item: keyof TTheme): TItemOut => builtTheme[item];
 
-export const mappings = <
+export const theme = <
   T extends { [k: string]: keyof TTheme },
   TTheme extends { [k: string]: TItemOut },
   TItemOut
@@ -49,7 +49,7 @@ export const mappings = <
   self: T,
   builtTheme: TTheme,
   err: (ref: keyof T) => TItemOut,
-) => {
-  const result = theme(self, buildMapping<TTheme, TItemOut>(builtTheme), err);
+): [Items<T, TItemOut>, Keys<Items<T, TItemOut>>] => {
+  const result = items(self, buildMapping<TTheme, TItemOut>(builtTheme), err);
   return [result, intoKeys(result)];
 };

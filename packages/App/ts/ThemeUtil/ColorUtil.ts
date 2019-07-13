@@ -13,4 +13,4 @@ const buildColor = (item: IColor) =>
     : `rgba(${item.r}, ${item.g}, ${item.b}, ${item.a})`;
 
 export const colors = <TItems extends { [k: string]: IColor }>(self: TItems) =>
-  setl.theme(self, buildColor, () => `rgb(0, 0, 0)`);
+  setl.items(self, buildColor, () => `rgb(0, 0, 0)`);

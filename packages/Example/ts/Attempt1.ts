@@ -4,20 +4,24 @@ interface IColor {
   b: number;
 }
 
-interface IColors {
+interface IRawColors {
   red: IColor;
   green: IColor;
   blue: IColor;
+}
 
+interface IColors {
   primaryForeground: string;
   primaryBackground: string;
 }
 
-export const colorTheme: IColors = {
+export const RawColors: IRawColors = {
   red: { r: 255, g: 0, b: 0 },
   green: { r: 0, g: 255, b: 0 },
   blue: { r: 0, g: 0, b: 255 },
+};
 
+export const Colors: IColors = {
   primaryForeground: "red",
   primaryBackground: "blue",
 };

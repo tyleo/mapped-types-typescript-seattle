@@ -11,8 +11,11 @@ const body = (theme: App.Theme): React.CSSProperties => ({
   width: "100%",
 });
 
-const button = (theme: App.Theme): React.CSSProperties => ({
-  backgroundColor: theme.Colors.buttonBackground,
+const button = (
+  theme: App.Theme,
+  backgroundColor = App.Color.buttonBackground,
+): React.CSSProperties => ({
+  backgroundColor: theme.Colors[backgroundColor],
   border: "none",
   borderRadius: `${theme.Numbers.borderRadius}px`,
   color: theme.Colors.primaryForeground,

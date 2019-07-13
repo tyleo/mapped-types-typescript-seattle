@@ -34,7 +34,7 @@ const buildFont = <TFontKey extends string | number | symbol>() => (
 export const fonts = <TItems extends { [k: string]: IFont<keyof TItems> }>(
   self: TItems,
 ) =>
-  setl.theme(self, buildFont<keyof TItems>(), (): [
+  setl.items(self, buildFont<keyof TItems>(), (): [
     IFont<keyof TItems>,
     string,
   ] => [{}, "comic sans"]);

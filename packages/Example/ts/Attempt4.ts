@@ -1,17 +1,25 @@
-type Items<T, TItem> = {
-  [K in keyof T]: TItem | keyof T;
-};
+interface IColor {
+  r: number;
+  g: number;
+  b: number;
+}
 
-const theme = <T extends Items<T, TItem>, TItem>(self: T) => self;
+// Go back to attempt 1 before showing this
+type RawColors<T> = { [k in keyof T]: IColor };
+const rawColors = <T extends RawColors<T>>(self: T) => self;
 
-export const colorTheme = theme({
+interface IColors {
+  primaryForeground: string;
+  primaryBackground: string;
+}
+
+export const RawColors = rawColors({
   red: { r: 255, g: 0, b: 0 },
   green: { r: 0, g: 255, b: 0 },
   blue: { r: 0, g: 0, b: 255 },
+});
 
+export const Colors: IColors = {
   primaryForeground: "red",
   primaryBackground: "blue",
-
-  // Error: properties can be anything
-  // anything: 5,
-});
+};

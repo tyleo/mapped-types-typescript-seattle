@@ -12,7 +12,7 @@ const RawColors = App.colors({
 });
 
 // Color Mapping
-export const [Colors, Color] = setl.mappings(
+export const [Colors, Color] = setl.theme(
   {
     primaryForeground: "lightestGrey",
     primaryBackground: "darkestGrey",
@@ -34,7 +34,7 @@ const RawFonts = App.fonts({
   heading: { basedOn: "normal", fontSize: "32px", fontStyle: "bold" },
 });
 
-export const [Fonts, Font] = setl.mappings(
+export const [Fonts, Font] = setl.theme(
   {
     normal: "normal",
     heading: "heading",
@@ -45,7 +45,7 @@ export const [Fonts, Font] = setl.mappings(
 export type Font = keyof typeof Font;
 
 // Number
-const RawNumbers = App.simpleTheme(
+const RawNumbers = App.simpleItems(
   {
     smallerPadding: 5,
     smallPadding: 7.5,
@@ -55,7 +55,7 @@ const RawNumbers = App.simpleTheme(
   0,
 );
 
-export const [Numbers, Number] = setl.mappings(
+export const [Numbers, Number] = setl.theme(
   {
     paddingToButtonEdge: "smallPadding",
     paddingToInputEdge: "smallerPadding",
@@ -70,7 +70,7 @@ export const [Numbers, Number] = setl.mappings(
 export type Number = keyof typeof Number;
 
 // String
-const RawStrings = App.simpleTheme(
+const RawStrings = App.simpleItems(
   {
     title: "Space Camp Sign Up",
     question: "Favorite Planet",
@@ -80,7 +80,7 @@ const RawStrings = App.simpleTheme(
   "ERROR",
 );
 
-export const [Strings, String] = setl.mappings(
+export const [Strings, String] = setl.theme(
   {
     title: "title",
     question: "question",

@@ -4,17 +4,25 @@ interface IColor {
   b: number;
 }
 
-type Colors<T> = {
-  [K in keyof T]: IColor | keyof T;
-};
+// This seems like it would work but doesn't
+// 1) We can no longer access the object RawColors
+// 2) Colors can now contain anything.
+interface IRawColors {
+  [k: string]: IColor;
+}
 
-const colors = <T extends Colors<T>>(self: T) => self;
+interface IColors {
+  primaryForeground: keyof IRawColors;
+  primaryBackground: keyof IRawColors;
+}
 
-export const colorTheme = colors({
+export const RawColors: IRawColors = {
   red: { r: 255, g: 0, b: 0 },
   green: { r: 0, g: 255, b: 0 },
   blue: { r: 0, g: 0, b: 255 },
+};
 
+export const Colors: IColors = {
   primaryForeground: "red",
   primaryBackground: "blue",
-});
+};
