@@ -4,88 +4,54 @@ import * as App from "App";
 
 // CSS
 
-const body = (
-  theme: App.Theme,
-  background: App.Color = App.Color.primaryBackground,
-): React.CSSProperties => ({
-  backgroundColor: theme.Colors[background],
+const body = (theme: App.Theme): React.CSSProperties => ({
+  backgroundColor: theme.Colors.primaryBackground,
   height: "100%",
   position: "absolute",
   width: "100%",
 });
 
-const button = (
-  theme: App.Theme,
-  background: App.Color = App.Color.buttonBackground,
-  foreground: App.Color = App.Color.primaryForeground,
-  padding: App.Number = App.Number.paddingToButtonEdge,
-  margin: App.Number = App.Number.marginBetweenItems,
-): React.CSSProperties => ({
-  backgroundColor: theme.Colors[background],
-  color: theme.Colors[foreground],
-  marginLeft: `${theme.Numbers[margin]}px`,
-  marginRight: `${theme.Numbers[margin]}px`,
-  padding: `${theme.Numbers[padding]}px`,
+const button = (theme: App.Theme): React.CSSProperties => ({
+  backgroundColor: theme.Colors.buttonBackground,
+  color: theme.Colors.primaryForeground,
+  marginLeft: `${theme.Numbers.marginBetweenItems}px`,
+  marginRight: `${theme.Numbers.marginBetweenItems}px`,
+  padding: `${theme.Numbers.paddingToButtonEdge}px`,
 });
 
-const buttonBox = (
-  theme: App.Theme,
-  margin: App.Number = App.Number.marginBetweenItems,
-): React.CSSProperties => ({
+const buttonBox = (theme: App.Theme): React.CSSProperties => ({
   alignSelf: "center",
-  marginTop: `${theme.Numbers[margin]}px`,
+  marginTop: `${theme.Numbers.marginBetweenItems}px`,
 });
 
-const content = (
-  theme: App.Theme,
-  padding: App.Number = App.Number.paddingToPageEdge,
-  background: App.Color = App.Color.secondaryBackground,
-  borderRadius: App.Number = App.Number.borderRadius,
-): React.CSSProperties => ({
-  backgroundColor: theme.Colors[background],
-  borderRadius: `${theme.Numbers[borderRadius]}px`,
-  margin: `${theme.Numbers[padding]}px`,
+const content = (theme: App.Theme): React.CSSProperties => ({
+  backgroundColor: theme.Colors.secondaryBackground,
+  borderRadius: `${theme.Numbers.borderRadius}px`,
+  margin: `${theme.Numbers.paddingToPageEdge}px`,
   width: "fit-content",
 });
 
-const heading = (
-  theme: App.Theme,
-  font: App.Font = App.Font.heading,
-  color: App.Color = App.Color.primaryForeground,
-  margin: App.Number = App.Number.marginToHeading,
-): React.CSSProperties => ({
+const heading = (theme: App.Theme): React.CSSProperties => ({
   alignSelf: "center",
-  color: theme.Colors[color],
-  marginBottom: `${theme.Numbers[margin]}px`,
-  font: theme.Fonts[font][1],
+  color: theme.Colors.primaryForeground,
+  marginBottom: `${theme.Numbers.marginToHeading}px`,
+  font: theme.Fonts.heading[1],
 });
 
-const innerContent = (
-  theme: App.Theme,
-  padding: App.Number = App.Number.paddingToPageEdge,
-): React.CSSProperties => ({
+const innerContent = (theme: App.Theme): React.CSSProperties => ({
   ...vert(),
-  padding: `${theme.Numbers[padding]}px`,
+  padding: `${theme.Numbers.paddingToPageEdge}px`,
 });
 
-const input = (
-  theme: App.Theme,
-  background: App.Color = App.Color.inputBackground,
-  foreground: App.Color = App.Color.primaryForeground,
-): React.CSSProperties => ({
-  backgroundColor: theme.Colors[background],
-  color: theme.Colors[foreground],
+const input = (theme: App.Theme): React.CSSProperties => ({
+  backgroundColor: theme.Colors.inputBackground,
+  color: theme.Colors.primaryForeground,
 });
 
-const label = (
-  theme: App.Theme,
-  font: App.Font = App.Font.normal,
-  color: App.Color = App.Color.primaryForeground,
-  margin: App.Number = App.Number.marginBetweenItems,
-): React.CSSProperties => ({
-  color: theme.Colors[color],
-  font: theme.Fonts[font][1],
-  marginRight: theme.Numbers[margin],
+const label = (theme: App.Theme): React.CSSProperties => ({
+  color: theme.Colors.primaryForeground,
+  font: theme.Fonts.normal[1],
+  marginRight: theme.Numbers.marginBetweenItems,
 });
 
 const vert = (): React.CSSProperties => ({
@@ -94,11 +60,8 @@ const vert = (): React.CSSProperties => ({
   flexDirection: "column",
 });
 
-const vertItem = (
-  theme: App.Theme,
-  margin: App.Number = App.Number.marginBetweenItems,
-): React.CSSProperties => ({
-  marginBottom: `${theme.Numbers[margin]}px`,
+const vertItem = (theme: App.Theme): React.CSSProperties => ({
+  marginBottom: `${theme.Numbers.marginBetweenItems}px`,
 });
 
 // HTML

@@ -9,12 +9,13 @@
       "type": "chrome",
       "request": "launch",
       "file": "${workspaceFolder}/packages/App/target/webpack/dev/index.html",
-      // "trace": "verbose",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
+        "webpack:///./ts/*": "${workspaceFolder}/packages/App/ts/*",
         "webpack:///../*": "${workspaceFolder}/packages/*"
       },
-      "preLaunchTask": "npm: build:dev - packages/App"
+      "preLaunchTask": "npm: build:dev - packages/App",
+      "trace": "verbose"
     }
   ]
 }

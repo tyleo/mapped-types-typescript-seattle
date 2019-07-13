@@ -31,7 +31,7 @@ const buildFont = <TFontKey extends string | number | symbol>() => (
   ];
 };
 
-export const fonts = <TItems extends setl.Items<IFont<keyof TItems>, TItems>>(
+export const fonts = <TItems extends setl.Items<TItems, IFont<keyof TItems>>>(
   self: TItems,
 ) =>
   setl.theme(self, buildFont<keyof TItems>(), (): [

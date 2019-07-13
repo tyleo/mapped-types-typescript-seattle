@@ -12,6 +12,6 @@ const buildColor = (item: IColor) =>
     ? `rgb(${item.r}, ${item.g}, ${item.b})`
     : `rgba(${item.r}, ${item.g}, ${item.b}, ${item.a})`;
 
-export const colors = <TItems extends setl.Items<IColor, TItems>>(
+export const colors = <TItems extends setl.Items<TItems, IColor>>(
   self: TItems,
 ) => setl.theme(self, buildColor, () => `rgb(0, 0, 0)`);

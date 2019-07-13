@@ -1,24 +1,26 @@
-import * as setl from "setl";
-
 import * as App from "App";
 
 // Color
-export const [Colors, Color] = App.colors({
-  // Raw Colors
-  red: { r: 100, g: 0, b: 0 },
-  darkred: { r: 255, g: 0, b: 0 },
+export const [RawColors, RawColor, RawColorInput] = App.colors({
+  red: { r: 255, g: 0, b: 0 },
   green: { r: 0, g: 255, b: 0 },
   blue: { r: 0, g: 0, b: 255 },
-
-  // Color Mappings
-  primaryForeground: setl.ref("darkred"),
-  primaryBackground: setl.ref("red"),
-  secondaryBackground: setl.ref("blue"),
-
-  buttonBackground: setl.ref("primaryBackground"),
-  inputBackground: setl.ref("green"),
+  white: { r: 255, g: 255, b: 255 },
 });
-export type Color = keyof typeof Color;
+export type RawColor = keyof typeof RawColor;
+
+// Color Mapping
+export const [Colors, Color, ColorInput] = App.colorMappings(
+  {
+    primaryForeground: { key: "white" },
+    primaryBackground: { key: "red" },
+    secondaryBackground: { key: "blue" },
+
+    buttonBackground: "primaryBackground",
+    inputBackground: { key: "green" },
+  },
+  RawColors,
+);
 
 // Font
 export const [Fonts, Font] = App.fonts({
@@ -37,10 +39,10 @@ export const [Numbers, Number] = App.numbers({
   borderRadius: 10,
 
   // Number Mappings
-  paddingToButtonEdge: setl.ref("smallPadding"),
-  marginBetweenItems: setl.ref("smallPadding"),
-  paddingToPageEdge: setl.ref("bigPadding"),
-  marginToHeading: setl.ref("bigPadding"),
+  paddingToButtonEdge: "smallPadding",
+  marginBetweenItems: "smallPadding",
+  paddingToPageEdge: "bigPadding",
+  marginToHeading: "bigPadding",
 });
 export type Number = keyof typeof Number;
 
