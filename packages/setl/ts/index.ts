@@ -53,3 +53,26 @@ export const theme = <
   const result = items(self, buildMapping<TTheme, TItemOut>(builtTheme), err);
   return [result, intoKeys(result)];
 };
+
+// Remap
+export const themeBasedOn = <
+  T extends { [k in keyof TBasedOn]?: keyof TTheme },
+  TBasedOn extends { [k: string]: keyof TTheme },
+  TTheme extends { [k: string]: TItemOut },
+  TItemOut
+>(
+  self: T,
+  basedOn: Items<TBasedOn, TItemOut>,
+  builtTheme: TTheme,
+  err: (ref: keyof T) => TItemOut,
+): Items<TBasedOn, TItemOut> => {
+  for (const [key, value] of Object.entries(self)) {
+    if (value === undefined) delete self[key];
+  }
+  const result = items(
+    self as { [k in keyof TBasedOn]: keyof TTheme },
+    buildMapping<TTheme, TItemOut>(builtTheme),
+    err,
+  );
+  return { ...basedOn, ...result };
+};

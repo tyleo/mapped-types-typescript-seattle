@@ -76,7 +76,15 @@ const vertItem = (theme: App.Theme): React.CSSProperties => ({
 // HTML
 
 export const Page = () => {
-  const [theme] = React.useState(App.Theme);
+  const [theme, setTheme] = React.useState(App.Theme);
+  const switchTheme = React.useCallback(() => {
+    if (theme === App.Theme) {
+      setTheme(App.UnicornTheme);
+    } else {
+      setTheme(App.Theme);
+    }
+  }, [theme, setTheme]);
+
   return (
     <div style={body(theme)}>
       <div style={content(theme)}>
@@ -101,6 +109,9 @@ export const Page = () => {
           <div style={buttonBox(theme)}>
             <button style={button(theme)}>{theme.Strings.okButton}</button>
             <button style={button(theme)}>{theme.Strings.exitButton}</button>
+            <button style={button(theme)} onClick={switchTheme}>
+              {theme.Strings.switchThemeButton}
+            </button>
           </div>
         </div>
       </div>

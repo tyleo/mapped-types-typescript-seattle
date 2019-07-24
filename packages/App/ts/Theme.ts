@@ -4,11 +4,19 @@ import * as App from "App";
 
 // Color
 const RawColors = App.colors({
+  // Space
   buttonGrey: { r: 45, g: 50, b: 56 },
   inputGrey: { r: 54, g: 54, b: 55 },
   darkestGrey: { r: 32, g: 33, b: 35 },
   grey: { r: 39, g: 40, b: 43 },
   lightestGrey: { r: 172, g: 177, b: 176 },
+
+  // Unicorn
+  buttonRed: { r: 233, g: 30, b: 99 },
+  inputPink: { r: 216, g: 178, b: 205 },
+  lightestPink: { r: 244, g: 213, b: 237 },
+  pink: { r: 227, g: 127, b: 202 },
+  lightGreyOverPink: { r: 242, g: 242, b: 242 },
 });
 
 // Color Mapping
@@ -72,20 +80,30 @@ export type Number = keyof typeof Number;
 // String
 const RawStrings = App.simpleItems(
   {
-    title: "Space Camp Sign Up",
-    question: "Favorite Planet",
-    okButton: "Launch",
-    exitButton: "Return to Earth",
+    switchThemeButton: "Switch Theme",
+
+    // Space Camp
+    spaceCampSignUp: "Space Camp Sign Up",
+    favoritePlanet: "Favorite Planet",
+    launchButton: "Launch",
+    returnButton: "Return to Earth",
+
+    // Unicorn Camp
+    unicornCampSignUp: "Unicorn Camp Sign Up",
+    favoriteColor: "Favorite Color",
+    rideButton: "Ride",
+    dismountButton: "Dismount",
   },
   "ERROR",
 );
 
 export const [Strings, String] = setl.theme(
   {
-    title: "title",
-    question: "question",
-    okButton: "okButton",
-    exitButton: "exitButton",
+    title: "spaceCampSignUp",
+    question: "favoritePlanet",
+    okButton: "launchButton",
+    exitButton: "returnButton",
+    switchThemeButton: "switchThemeButton",
   },
   RawStrings,
   () => "ERROR",
@@ -100,3 +118,39 @@ export const Theme = {
   Strings,
 } as const;
 export type Theme = typeof Theme;
+
+// Unicorn Theme
+
+// Color
+export const UnicornColors = setl.themeBasedOn(
+  {
+    primaryForeground: "lightGreyOverPink",
+    primaryBackground: "lightestPink",
+    secondaryBackground: "pink",
+
+    buttonBackground: "buttonRed",
+    inputBackground: "inputPink",
+  },
+  Colors,
+  RawColors,
+  () => "ERROR",
+);
+
+// String
+export const UnicornStrings = setl.themeBasedOn(
+  {
+    title: "unicornCampSignUp",
+    question: "favoriteColor",
+    okButton: "rideButton",
+    exitButton: "dismountButton",
+  },
+  Strings,
+  RawStrings,
+  () => "ERROR",
+);
+
+export const UnicornTheme = {
+  ...Theme,
+  Colors: UnicornColors,
+  Strings: UnicornStrings,
+} as Theme;
