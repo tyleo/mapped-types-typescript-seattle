@@ -80,6 +80,8 @@ export const Page = () => {
   const switchTheme = React.useCallback(() => {
     if (theme === App.Theme) {
       setTheme(App.UnicornTheme);
+    } else if (theme === App.UnicornTheme) {
+      setTheme(App.DinosaurTheme);
     } else {
       setTheme(App.Theme);
     }

@@ -17,6 +17,13 @@ const RawColors = App.colors({
   lightestPink: { r: 244, g: 213, b: 237 },
   pink: { r: 227, g: 127, b: 202 },
   lightGreyOverPink: { r: 242, g: 242, b: 242 },
+
+  // Dinosaur
+  white: { r: 255, g: 255, b: 255 },
+  green: { r: 4, g: 111, b: 17 },
+  blue: { r: 16, g: 52, b: 125 },
+  lightGreen: { r: 82, g: 140, b: 45 },
+  waterGreen: { r: 14, g: 148, b: 99 },
 });
 
 // Color Mapping
@@ -93,6 +100,12 @@ const RawStrings = App.simpleItems(
     favoriteColor: "Favorite Color",
     rideButton: "Ride",
     dismountButton: "Dismount",
+
+    // Dinosaur Camp
+    dinosaurCampSignUp: "Dinosaur Camp Sign Up",
+    favoriteDinosour: "Favorite Dinosaur",
+    roarButton: "Roar",
+    hideButton: "Hide",
   },
   "ERROR",
 );
@@ -153,4 +166,40 @@ export const UnicornTheme = {
   ...Theme,
   Colors: UnicornColors,
   Strings: UnicornStrings,
+} as Theme;
+
+// Dinosaur Theme
+
+// Color
+export const DinosaurColors = setl.themeBasedOn(
+  {
+    primaryForeground: "white",
+    primaryBackground: "blue",
+    secondaryBackground: "green",
+
+    buttonBackground: "waterGreen",
+    inputBackground: "lightGreen",
+  },
+  Colors,
+  RawColors,
+  () => "ERROR",
+);
+
+// String
+export const DinosaurStrings = setl.themeBasedOn(
+  {
+    title: "dinosaurCampSignUp",
+    question: "favoriteDinosour",
+    okButton: "roarButton",
+    exitButton: "hideButton",
+  },
+  Strings,
+  RawStrings,
+  () => "ERROR",
+);
+
+export const DinosaurTheme = {
+  ...Theme,
+  Colors: DinosaurColors,
+  Strings: DinosaurStrings,
 } as Theme;
